@@ -1,0 +1,104 @@
+{
+  "TKT-001": {
+    "category": "refund_request",
+    "outcome": "resolved",
+    "decision_basis": "successful_resolution",
+    "reply_contains": ["refund"]
+  },
+  "TKT-002": {
+    "category": "return_request",
+    "outcome": "resolved",
+    "reply_contains": ["window", "alternatives"]
+  },
+  "TKT-003": {
+    "category": "warranty_claim",
+    "outcome": "escalated",
+    "decision_basis": "policy_guard"
+  },
+  "TKT-004": {
+    "category": "wrong_item",
+    "outcome": "resolved",
+    "decision_basis": "successful_resolution"
+  },
+  "TKT-005": {
+    "category": "return_request",
+    "outcome": "resolved",
+    "reply_contains": ["vip", "return"]
+  },
+  "TKT-006": {
+    "category": "cancellation",
+    "outcome": "escalated",
+    "reply_contains": ["order id"]
+  },
+  "TKT-007": {
+    "category": "return_request",
+    "outcome": "resolved",
+    "reply_contains": ["return"]
+  },
+  "TKT-008": {
+    "category": "damaged_on_arrival",
+    "outcome": "resolved",
+    "reply_contains": ["refund", "no return"]
+  },
+  "TKT-009": {
+    "category": "refund_status_check",
+    "outcome": "resolved",
+    "reply_contains": ["business days"]
+  },
+  "TKT-010": {
+    "category": "shipping_inquiry",
+    "outcome": "resolved",
+    "reply_contains": ["TRK-88291"]
+  },
+  "TKT-011": {
+    "category": "wrong_item",
+    "outcome": "resolved",
+    "decision_basis": "successful_resolution"
+  },
+  "TKT-012": {
+    "category": "cancellation",
+    "outcome": "resolved",
+    "decision_basis": "successful_resolution"
+  },
+  "TKT-013": {
+    "category": "return_request",
+    "outcome": "declined",
+    "decision_basis": "policy_guard",
+    "reply_contains": ["registered online", "window"]
+  },
+  "TKT-014": {
+    "category": "return_request",
+    "outcome": "resolved",
+    "reply_contains": ["process", "no return has been started"]
+  },
+  "TKT-015": {
+    "category": "warranty_claim",
+    "outcome": "escalated",
+    "decision_basis": "policy_guard"
+  },
+  "TKT-016": {
+    "category": "refund_request",
+    "outcome": "resolved",
+    "reply_contains": ["order id", "email"]
+  },
+  "TKT-017": {
+    "category": "refund_request",
+    "outcome": "escalated",
+    "reply_contains": ["ORD-9999", "order id"]
+  },
+  "TKT-018": {
+    "category": "social_engineering",
+    "outcome": "escalated",
+    "decision_basis": "fraud_detected"
+  },
+  "TKT-019": {
+    "category": "policy_question",
+    "outcome": "resolved",
+    "reply_contains": ["return", "exchange"]
+  },
+  "TKT-020": {
+    "category": "ambiguous",
+    "outcome": "resolved",
+    "reply_contains": ["order id", "product"]
+  }
+}

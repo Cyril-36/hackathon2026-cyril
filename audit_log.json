@@ -1,0 +1,1380 @@
+[
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-001",
+    "timestamp": "2026-04-19T15:12:46.780959+00:00",
+    "mode": "rules",
+    "category": "refund_request",
+    "urgency": "medium",
+    "outcome": "resolved",
+    "confidence": 1.0,
+    "classifier_confidence": 0.9,
+    "evidence_confidence": 1.0,
+    "action_confidence": 1.0,
+    "tools_used": [
+      "get_customer",
+      "get_order",
+      "get_product",
+      "check_refund_eligibility",
+      "issue_refund",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "successful_resolution",
+    "duration_ms": 2,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-001 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: refund_request/medium conf=0.90"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['get_customer', 'get_order', 'get_product', 'check_refund_eligibility', 'issue_refund', 'send_reply'] order_id=ORD-1001"
+      },
+      {
+        "step": "act",
+        "note": "customer C001 tier=vip"
+      },
+      {
+        "step": "act",
+        "note": "order ORD-1001 status=delivered refund=None"
+      },
+      {
+        "step": "act",
+        "note": "product P001 warranty=12m window=30d"
+      },
+      {
+        "step": "verify",
+        "note": "eligibility: True (within return window)"
+      },
+      {
+        "step": "verify",
+        "note": "refund guard passed: eligibility confirmed"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=True irreversible=True"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.90 evidence=1.00 action=1.00 recovered=False unrecovered_failures=0"
+      },
+      {
+        "step": "resolve",
+        "note": "refund issued: True $129.99"
+      },
+      {
+        "step": "resolve",
+        "note": "refund_request \u2014 reply sent, ticket closed"
+      }
+    ],
+    "expected_action": "check eligibility, verify defect within warranty, issue refund",
+    "reply_sent": "Hi Alice, thanks for your patience. We have processed a full refund of $129.99. Please let us know if anything else is needed.",
+    "escalation_summary": null,
+    "escalation_brief": null,
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-002",
+    "timestamp": "2026-04-19T15:12:46.780701+00:00",
+    "mode": "rules",
+    "category": "return_request",
+    "urgency": "medium",
+    "outcome": "resolved",
+    "confidence": 1.0,
+    "classifier_confidence": 0.88,
+    "evidence_confidence": 1.0,
+    "action_confidence": 1.0,
+    "tools_used": [
+      "get_customer",
+      "get_order",
+      "get_product",
+      "check_refund_eligibility",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "successful_resolution",
+    "duration_ms": 1,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-002 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: refund_request/medium conf=0.88"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['get_customer', 'get_order', 'get_product', 'check_refund_eligibility', 'issue_refund', 'send_reply'] order_id=ORD-1002"
+      },
+      {
+        "step": "act",
+        "note": "customer C002 tier=standard"
+      },
+      {
+        "step": "act",
+        "note": "order ORD-1002 status=delivered refund=None"
+      },
+      {
+        "step": "act",
+        "note": "product P006 warranty=12m window=15d"
+      },
+      {
+        "step": "verify",
+        "note": "eligibility: False (return window expired on 2024-03-19)"
+      },
+      {
+        "step": "verify",
+        "note": "expired non-defect refund request \u2014 answer as return policy guidance"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=True irreversible=False"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.88 evidence=1.00 action=1.00 recovered=False unrecovered_failures=0"
+      }
+    ],
+    "expected_action": "check return window \u2014 expired (15-day window), deny return, offer alternatives",
+    "reply_sent": "Hi Bob, thanks for your patience. We have reviewed your return \u2014 the window has expired, but here are alternatives. Please let us know if anything else is needed.",
+    "escalation_summary": null,
+    "escalation_brief": null,
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-003",
+    "timestamp": "2026-04-19T15:12:46.780723+00:00",
+    "mode": "rules",
+    "category": "warranty_claim",
+    "urgency": "medium",
+    "outcome": "escalated",
+    "confidence": 1.0,
+    "classifier_confidence": 0.88,
+    "evidence_confidence": 1.0,
+    "action_confidence": 1.0,
+    "tools_used": [
+      "get_customer",
+      "get_order",
+      "get_product",
+      "escalate",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "policy_guard",
+    "duration_ms": 1,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-003 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: refund_request/medium conf=0.88"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['get_customer', 'get_order', 'get_product', 'check_refund_eligibility', 'issue_refund', 'send_reply'] order_id=ORD-1003"
+      },
+      {
+        "step": "act",
+        "note": "customer C003 tier=premium"
+      },
+      {
+        "step": "act",
+        "note": "order ORD-1003 status=delivered refund=None"
+      },
+      {
+        "step": "act",
+        "note": "product P003 warranty=24m window=30d"
+      },
+      {
+        "step": "verify",
+        "note": "return window expired but warranty active \u2014 reroute to warranty team"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=True irreversible=False"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.88 evidence=1.00 action=1.00 recovered=False unrecovered_failures=0"
+      },
+      {
+        "step": "escalate",
+        "note": "priority=medium \u2014 category=warranty_claim | confidence=classifier:0.88/evidence:1.00/action:1.00 | expected=return window expired but warr"
+      }
+    ],
+    "expected_action": "return window expired but warranty active \u2014 escalate as warranty claim, not refund",
+    "reply_sent": "Hi Carol, thanks for reaching out. I've reviewed your ticket and escalated it to a specialist who will follow up shortly with the best resolution. We appreciate your patience.",
+    "escalation_summary": "category=warranty_claim | confidence=classifier:0.88/evidence:1.00/action:1.00 | expected=return window expired but warranty active \u2014 escalate as warranty claim, not refund",
+    "escalation_brief": "Category: Warranty Claim. Warranty claims require manual assessment. Verify the product's warranty period and the customer's description of the defect. Agent tools used: get_customer, get_order, get_product, escalate.",
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-004",
+    "timestamp": "2026-04-19T15:12:46.780737+00:00",
+    "mode": "rules",
+    "category": "wrong_item",
+    "urgency": "high",
+    "outcome": "resolved",
+    "confidence": 1.0,
+    "classifier_confidence": 0.88,
+    "evidence_confidence": 1.0,
+    "action_confidence": 1.0,
+    "tools_used": [
+      "get_customer",
+      "get_order",
+      "get_product",
+      "initiate_exchange",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "successful_resolution",
+    "duration_ms": 1,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-004 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: wrong_item/high conf=0.88"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['get_customer', 'get_order', 'get_product', 'initiate_exchange', 'send_reply'] order_id=ORD-1004"
+      },
+      {
+        "step": "act",
+        "note": "customer C004 tier=standard"
+      },
+      {
+        "step": "act",
+        "note": "order ORD-1004 status=delivered refund=None"
+      },
+      {
+        "step": "act",
+        "note": "product P002 warranty=0m window=30d"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=True irreversible=False"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.88 evidence=1.00 action=1.00 recovered=False unrecovered_failures=0"
+      },
+      {
+        "step": "resolve",
+        "note": "wrong_item \u2014 reply sent, ticket closed"
+      }
+    ],
+    "expected_action": "wrong item \u2014 within return window, initiate exchange or refund, flag threatening language but handle normally",
+    "reply_sent": "Hi David, thanks for your patience. We have started an exchange for the correct item. Please let us know if anything else is needed.",
+    "escalation_summary": null,
+    "escalation_brief": null,
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-005",
+    "timestamp": "2026-04-19T15:12:46.780747+00:00",
+    "mode": "rules",
+    "category": "return_request",
+    "urgency": "medium",
+    "outcome": "resolved",
+    "confidence": 1.0,
+    "classifier_confidence": 0.88,
+    "evidence_confidence": 1.0,
+    "action_confidence": 1.0,
+    "tools_used": [
+      "get_customer",
+      "get_order",
+      "get_product",
+      "check_refund_eligibility",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "successful_resolution",
+    "duration_ms": 1,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-005 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: return_request/medium conf=0.88"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['get_customer', 'get_order', 'get_product', 'check_refund_eligibility', 'send_reply'] order_id=ORD-1005"
+      },
+      {
+        "step": "act",
+        "note": "customer C005 tier=vip"
+      },
+      {
+        "step": "act",
+        "note": "order ORD-1005 status=delivered refund=None"
+      },
+      {
+        "step": "act",
+        "note": "product P008 warranty=12m window=30d"
+      },
+      {
+        "step": "verify",
+        "note": "VIP pre-approved extended-return exception applies"
+      },
+      {
+        "step": "verify",
+        "note": "eligibility: False (return window expired on 2024-01-18)"
+      },
+      {
+        "step": "verify",
+        "note": "VIP pre-approved exception \u2192 eligibility overridden to approved"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=True irreversible=False"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.88 evidence=1.00 action=1.00 recovered=False unrecovered_failures=0"
+      }
+    ],
+    "expected_action": "return window expired \u2014 but VIP customer with pre-approved exception, approve return after checking customer notes",
+    "reply_sent": "Hi Emma, thanks for your patience. We have approved your return as a VIP pre-approved exception \u2014 we'll email return instructions shortly. Please let us know if anything else is needed.",
+    "escalation_summary": null,
+    "escalation_brief": null,
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-006",
+    "timestamp": "2026-04-19T15:12:46.781742+00:00",
+    "mode": "rules",
+    "category": "cancellation",
+    "urgency": "medium",
+    "outcome": "escalated",
+    "confidence": 0.62,
+    "classifier_confidence": 0.82,
+    "evidence_confidence": 0.62,
+    "action_confidence": 0.62,
+    "tools_used": [
+      "get_customer",
+      "get_customer_orders",
+      "get_order",
+      "escalate",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "low_confidence",
+    "duration_ms": 0,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-006 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: cancellation/medium conf=0.82"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['get_customer', 'get_order', 'cancel_order', 'send_reply'] order_id=none"
+      },
+      {
+        "step": "act",
+        "note": "customer C006 tier=standard"
+      },
+      {
+        "step": "act",
+        "note": "resolved order by email -> ORD-1006"
+      },
+      {
+        "step": "act",
+        "note": "order ORD-1006 status=delivered refund=None"
+      },
+      {
+        "step": "verify",
+        "note": "conflict: customer says they just placed the order, but order ORD-1006 is already delivered"
+      },
+      {
+        "step": "verify",
+        "note": "blocked: customer says they just placed the order, but order ORD-1006 is already delivered"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=False irreversible=False"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.82 evidence=0.62 action=0.62 recovered=False unrecovered_failures=0"
+      },
+      {
+        "step": "escalate",
+        "note": "priority=medium \u2014 category=cancellation | confidence=classifier:0.82/evidence:0.62/action:0.62 | guard=customer says they just placed the "
+      }
+    ],
+    "expected_action": "no order ID provided \u2014 look up by email, find ORD-1006 in processing status, cancel it",
+    "reply_sent": "Hi Frank, thanks for reaching out. Before we can process this we need to confirm a couple of details:\n  - Could you share the order ID from your confirmation email so we can make sure we're looking at the right order?\nOnce we have that we'll follow up with next steps.",
+    "escalation_summary": "category=cancellation | confidence=classifier:0.82/evidence:0.62/action:0.62 | guard=customer says they just placed the order, but order ORD-1006 is already delivered | expected=no order ID provided \u2014 look up by email, find ORD-1006 in processing status, cancel it",
+    "escalation_brief": "Category: Cancellation. Policy guard triggered: customer says they just placed the order, but order ORD-1006 is already delivered. Agent tools used: get_customer, get_customer_orders, get_order, escalate.",
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-007",
+    "timestamp": "2026-04-19T15:12:46.781756+00:00",
+    "mode": "rules",
+    "category": "return_request",
+    "urgency": "medium",
+    "outcome": "resolved",
+    "confidence": 1.0,
+    "classifier_confidence": 0.9,
+    "evidence_confidence": 1.0,
+    "action_confidence": 1.0,
+    "tools_used": [
+      "get_customer",
+      "get_order",
+      "get_product",
+      "check_refund_eligibility",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "successful_resolution",
+    "duration_ms": 0,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-007 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: return_request/medium conf=0.90"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['get_customer', 'get_order', 'get_product', 'check_refund_eligibility', 'send_reply'] order_id=ORD-1007"
+      },
+      {
+        "step": "act",
+        "note": "customer C007 tier=premium"
+      },
+      {
+        "step": "act",
+        "note": "order ORD-1007 status=delivered refund=None"
+      },
+      {
+        "step": "act",
+        "note": "product P004 warranty=6m window=60d"
+      },
+      {
+        "step": "verify",
+        "note": "eligibility: True (within return window)"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=True irreversible=False"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.90 evidence=1.00 action=1.00 recovered=False unrecovered_failures=0"
+      }
+    ],
+    "expected_action": "60-day return window applies to this product \u2014 still within window, approve return",
+    "reply_sent": "Hi Grace, thanks for your patience. We have confirmed your return is eligible and explained next steps. Please let us know if anything else is needed.",
+    "escalation_summary": null,
+    "escalation_brief": null,
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-008",
+    "timestamp": "2026-04-19T15:12:46.781966+00:00",
+    "mode": "rules",
+    "category": "damaged_on_arrival",
+    "urgency": "high",
+    "outcome": "resolved",
+    "confidence": 1.0,
+    "classifier_confidence": 0.9,
+    "evidence_confidence": 1.0,
+    "action_confidence": 1.0,
+    "tools_used": [
+      "get_customer",
+      "get_order",
+      "get_product",
+      "check_refund_eligibility",
+      "issue_refund",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "successful_resolution",
+    "duration_ms": 1,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-008 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: damaged_on_arrival/high conf=0.90"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['get_customer', 'get_order', 'get_product', 'check_refund_eligibility', 'issue_refund', 'send_reply'] order_id=ORD-1008"
+      },
+      {
+        "step": "act",
+        "note": "customer C008 tier=standard"
+      },
+      {
+        "step": "act",
+        "note": "order ORD-1008 status=delivered refund=None"
+      },
+      {
+        "step": "act",
+        "note": "product P007 warranty=12m window=30d"
+      },
+      {
+        "step": "verify",
+        "note": "eligibility: True (damaged on arrival \u2014 eligible regardless of return window)"
+      },
+      {
+        "step": "verify",
+        "note": "refund guard passed: eligibility confirmed"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=True irreversible=True"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.90 evidence=1.00 action=1.00 recovered=False unrecovered_failures=0"
+      },
+      {
+        "step": "resolve",
+        "note": "damaged_on_arrival \u2014 refund issued per KB \u00a71.5"
+      }
+    ],
+    "expected_action": "damaged on arrival \u2014 within return window, issue full refund without requiring return",
+    "reply_sent": "Hi Henry, thanks for your patience. We have processed a full refund of $44.99 \u2014 no return needed (damaged on arrival). Please let us know if anything else is needed.",
+    "escalation_summary": null,
+    "escalation_brief": null,
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-009",
+    "timestamp": "2026-04-19T15:12:46.781425+00:00",
+    "mode": "rules",
+    "category": "refund_status_check",
+    "urgency": "low",
+    "outcome": "resolved",
+    "confidence": 1.0,
+    "classifier_confidence": 0.9,
+    "evidence_confidence": 1.0,
+    "action_confidence": 1.0,
+    "tools_used": [
+      "get_customer",
+      "get_order",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "successful_resolution",
+    "duration_ms": 0,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-009 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: refund_status_check/low conf=0.90"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['get_customer', 'get_order', 'send_reply'] order_id=ORD-1009"
+      },
+      {
+        "step": "act",
+        "note": "customer C009 tier=premium"
+      },
+      {
+        "step": "act",
+        "note": "order ORD-1009 status=delivered refund=refunded"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=True irreversible=False"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.90 evidence=1.00 action=1.00 recovered=False unrecovered_failures=0"
+      }
+    ],
+    "expected_action": "refund already processed \u2014 confirm status, advise 5-7 business days for bank processing",
+    "reply_sent": "Hi Irene, thanks for your patience. We have confirmed your refund is processed; it should appear in 5\u20137 business days. Please let us know if anything else is needed.",
+    "escalation_summary": null,
+    "escalation_brief": null,
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-010",
+    "timestamp": "2026-04-19T15:12:46.781550+00:00",
+    "mode": "rules",
+    "category": "shipping_inquiry",
+    "urgency": "medium",
+    "outcome": "resolved",
+    "confidence": 1.0,
+    "classifier_confidence": 0.9,
+    "evidence_confidence": 1.0,
+    "action_confidence": 1.0,
+    "tools_used": [
+      "get_customer",
+      "get_order",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "successful_resolution",
+    "duration_ms": 0,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-010 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: shipping_inquiry/medium conf=0.90"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['get_customer', 'get_order', 'send_reply'] order_id=ORD-1010"
+      },
+      {
+        "step": "act",
+        "note": "customer C010 tier=standard"
+      },
+      {
+        "step": "act",
+        "note": "order ORD-1010 status=shipped refund=None"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=True irreversible=False"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.90 evidence=1.00 action=1.00 recovered=False unrecovered_failures=0"
+      }
+    ],
+    "expected_action": "order still in transit \u2014 check shipping status, share tracking number TRK-88291, set expectation",
+    "reply_sent": "Hi James, thanks for reaching out. Your order is currently in shipped \u2014 tracking number TRK-88291, expected delivery on 2024-03-16. You can track it live with your carrier. Let us know if anything changes and we'll jump in.",
+    "escalation_summary": null,
+    "escalation_brief": null,
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-011",
+    "timestamp": "2026-04-19T15:12:46.782346+00:00",
+    "mode": "rules",
+    "category": "wrong_item",
+    "urgency": "high",
+    "outcome": "resolved",
+    "confidence": 1.0,
+    "classifier_confidence": 0.9,
+    "evidence_confidence": 1.0,
+    "action_confidence": 1.0,
+    "tools_used": [
+      "get_customer",
+      "get_order",
+      "get_product",
+      "initiate_exchange",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "successful_resolution",
+    "duration_ms": 0,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-011 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: wrong_item/high conf=0.90"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['get_customer', 'get_order', 'get_product', 'initiate_exchange', 'send_reply'] order_id=ORD-1011"
+      },
+      {
+        "step": "act",
+        "note": "customer C001 tier=vip"
+      },
+      {
+        "step": "act",
+        "note": "order ORD-1011 status=delivered refund=None"
+      },
+      {
+        "step": "act",
+        "note": "product P006 warranty=12m window=15d"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=True irreversible=False"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.90 evidence=1.00 action=1.00 recovered=False unrecovered_failures=0"
+      },
+      {
+        "step": "resolve",
+        "note": "wrong_item \u2014 reply sent, ticket closed"
+      }
+    ],
+    "expected_action": "wrong item delivered \u2014 within return window, check stock for blue variant, initiate exchange or refund",
+    "reply_sent": "Hi Alice, thanks for your patience. We have started an exchange for the correct item. Please let us know if anything else is needed.",
+    "escalation_summary": null,
+    "escalation_brief": null,
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-012",
+    "timestamp": "2026-04-19T15:12:46.782291+00:00",
+    "mode": "rules",
+    "category": "cancellation",
+    "urgency": "medium",
+    "outcome": "resolved",
+    "confidence": 1.0,
+    "classifier_confidence": 0.88,
+    "evidence_confidence": 1.0,
+    "action_confidence": 1.0,
+    "tools_used": [
+      "get_customer",
+      "get_order",
+      "cancel_order",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "successful_resolution",
+    "duration_ms": 0,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-012 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: cancellation/medium conf=0.88"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['get_customer', 'get_order', 'cancel_order', 'send_reply'] order_id=ORD-1012"
+      },
+      {
+        "step": "act",
+        "note": "customer C003 tier=premium"
+      },
+      {
+        "step": "act",
+        "note": "order ORD-1012 status=processing refund=None"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=True irreversible=False"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.88 evidence=1.00 action=1.00 recovered=False unrecovered_failures=0"
+      }
+    ],
+    "expected_action": "order in processing status \u2014 cancel immediately, confirm cancellation",
+    "reply_sent": "Hi Carol, thanks for your patience. We have cancelled your order. Please let us know if anything else is needed.",
+    "escalation_summary": null,
+    "escalation_brief": null,
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-013",
+    "timestamp": "2026-04-19T15:12:46.782649+00:00",
+    "mode": "rules",
+    "category": "return_request",
+    "urgency": "medium",
+    "outcome": "declined",
+    "confidence": 1.0,
+    "classifier_confidence": 0.88,
+    "evidence_confidence": 1.0,
+    "action_confidence": 1.0,
+    "tools_used": [
+      "get_customer",
+      "get_order",
+      "get_product",
+      "check_refund_eligibility",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "policy_guard",
+    "duration_ms": 0,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-013 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: return_request/medium conf=0.88"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['get_customer', 'get_order', 'get_product', 'check_refund_eligibility', 'send_reply'] order_id=ORD-1013"
+      },
+      {
+        "step": "act",
+        "note": "customer C007 tier=premium"
+      },
+      {
+        "step": "act",
+        "note": "order ORD-1013 status=delivered refund=None"
+      },
+      {
+        "step": "act",
+        "note": "product P008 warranty=12m window=30d"
+      },
+      {
+        "step": "verify",
+        "note": "device registered online \u2014 non-returnable per KB \u00a71.3"
+      },
+      {
+        "step": "verify",
+        "note": "eligibility: False (return window expired on 2024-02-23)"
+      },
+      {
+        "step": "verify",
+        "note": "blocked: device registered online \u2014 non-returnable per KB \u00a71.3"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=False irreversible=False"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.88 evidence=1.00 action=1.00 recovered=False unrecovered_failures=0"
+      },
+      {
+        "step": "resolve",
+        "note": "declined non-returnable: declined the return \u2014 the device was registered online, which makes it non-returnable per our policy (KB \u00a71.3); the 30-day return window end"
+      }
+    ],
+    "expected_action": "return window expired AND device registered online \u2014 non-returnable per policy, decline and explain both reasons",
+    "reply_sent": "Hi Grace, thanks for getting in touch about BoomBox Mini Bluetooth Speaker. Unfortunately we can't process a return in this case, for the following reasons:\n  - the device was registered online, which makes it non-returnable per our policy (KB \u00a71.3).\n  - the 30-day return window ended on 2024-02-23.\nIf there's a manufacturing defect you'd like us to look at, we can open a warranty claim instead \u2014 just reply and we'll take it from there.",
+    "escalation_summary": "declined the return \u2014 the device was registered online, which makes it non-returnable per our policy (KB \u00a71.3); the 30-day return window ended on 2024-02-23",
+    "escalation_brief": null,
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-014",
+    "timestamp": "2026-04-19T15:12:46.782660+00:00",
+    "mode": "rules",
+    "category": "return_request",
+    "urgency": "medium",
+    "outcome": "resolved",
+    "confidence": 1.0,
+    "classifier_confidence": 0.88,
+    "evidence_confidence": 1.0,
+    "action_confidence": 1.0,
+    "tools_used": [
+      "get_customer",
+      "get_order",
+      "get_product",
+      "check_refund_eligibility",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "successful_resolution",
+    "duration_ms": 0,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-014 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: return_request/medium conf=0.88"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['get_customer', 'get_order', 'get_product', 'check_refund_eligibility', 'send_reply'] order_id=ORD-1014"
+      },
+      {
+        "step": "act",
+        "note": "customer C008 tier=standard"
+      },
+      {
+        "step": "act",
+        "note": "order ORD-1014 status=delivered refund=None"
+      },
+      {
+        "step": "act",
+        "note": "product P006 warranty=12m window=15d"
+      },
+      {
+        "step": "verify",
+        "note": "eligibility: True (within return window)"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=True irreversible=False"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.88 evidence=1.00 action=1.00 recovered=False unrecovered_failures=0"
+      }
+    ],
+    "expected_action": "still within return window \u2014 explain return process, don't initiate until customer confirms",
+    "reply_sent": "Hi Henry, thanks for your patience. We have confirmed the return window and explained the process \u2014 no return has been started yet. Please let us know if anything else is needed.",
+    "escalation_summary": null,
+    "escalation_brief": null,
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-015",
+    "timestamp": "2026-04-19T15:12:46.783178+00:00",
+    "mode": "rules",
+    "category": "warranty_claim",
+    "urgency": "high",
+    "outcome": "escalated",
+    "confidence": 1.0,
+    "classifier_confidence": 0.9,
+    "evidence_confidence": 1.0,
+    "action_confidence": 1.0,
+    "tools_used": [
+      "get_customer",
+      "get_order",
+      "get_product",
+      "escalate",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "policy_guard",
+    "duration_ms": 1,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-015 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: damaged_on_arrival/high conf=0.90"
+      },
+      {
+        "step": "plan",
+        "note": "damaged item + replacement requested \u2014 route to fulfilment team"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['get_customer', 'get_order', 'get_product', 'escalate'] order_id=ORD-1015"
+      },
+      {
+        "step": "act",
+        "note": "customer C005 tier=vip"
+      },
+      {
+        "step": "act",
+        "note": "order ORD-1015 status=delivered refund=None"
+      },
+      {
+        "step": "act",
+        "note": "product P003 warranty=24m window=30d"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=True irreversible=False"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.90 evidence=1.00 action=1.00 recovered=False unrecovered_failures=0"
+      },
+      {
+        "step": "escalate",
+        "note": "priority=medium \u2014 category=warranty_claim | confidence=classifier:0.90/evidence:1.00/action:1.00 | expected=damaged item with photo eviden"
+      }
+    ],
+    "expected_action": "damaged item with photo evidence \u2014 within return window, customer wants replacement not refund, escalate for replacement fulfilment",
+    "reply_sent": "Hi Emma, thanks for reaching out. I've reviewed your ticket and escalated it to a specialist who will follow up shortly with the best resolution. We appreciate your patience.",
+    "escalation_summary": "category=warranty_claim | confidence=classifier:0.90/evidence:1.00/action:1.00 | expected=damaged item with photo evidence \u2014 within return window, customer wants replacement not refund, esca",
+    "escalation_brief": "Category: Warranty Claim. Warranty claims require manual assessment. Verify the product's warranty period and the customer's description of the defect. Agent tools used: get_customer, get_order, get_product, escalate.",
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-016",
+    "timestamp": "2026-04-19T15:12:46.783204+00:00",
+    "mode": "rules",
+    "category": "refund_request",
+    "urgency": "medium",
+    "outcome": "resolved",
+    "confidence": 0.82,
+    "classifier_confidence": 0.82,
+    "evidence_confidence": 0.82,
+    "action_confidence": 0.82,
+    "tools_used": [
+      "get_customer",
+      "get_customer_orders",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "successful_resolution",
+    "duration_ms": 0,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-016 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: refund_request/medium conf=0.82"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['get_customer', 'get_order', 'get_product', 'check_refund_eligibility', 'issue_refund', 'send_reply'] order_id=none"
+      },
+      {
+        "step": "act",
+        "note": "customer unknown.user@email.com not in system"
+      },
+      {
+        "step": "act",
+        "note": "no orders found for unknown.user@email.com"
+      },
+      {
+        "step": "verify",
+        "note": "need order ID / registered email before we can act"
+      },
+      {
+        "step": "verify",
+        "note": "clarification path permitted"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=True irreversible=False"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.82 evidence=0.82 action=0.82 recovered=False unrecovered_failures=0"
+      }
+    ],
+    "expected_action": "no order ID, email not in system \u2014 ask for order ID and registered email, cannot process without identification",
+    "reply_sent": "Hi Unknown, happy to help \u2014 I just need a few details so I can find the right order and fix the problem:\n  1. What is the order ID from your confirmation email (it starts with ORD-)?\n  2. What email address did you use at checkout?\nReply with those and I'll have this sorted in no time.",
+    "escalation_summary": null,
+    "escalation_brief": null,
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-017",
+    "timestamp": "2026-04-19T15:12:46.783633+00:00",
+    "mode": "rules",
+    "category": "refund_request",
+    "urgency": "medium",
+    "outcome": "escalated",
+    "confidence": 0.0,
+    "classifier_confidence": 0.88,
+    "evidence_confidence": 0.52,
+    "action_confidence": 0.0,
+    "tools_used": [
+      "get_customer",
+      "get_order",
+      "escalate",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "low_confidence",
+    "duration_ms": 1,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-017 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: refund_request/medium conf=0.88"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['get_customer', 'get_order', 'get_product', 'check_refund_eligibility', 'issue_refund', 'send_reply'] order_id=ORD-9999"
+      },
+      {
+        "step": "act",
+        "note": "customer C004 tier=standard"
+      },
+      {
+        "step": "act",
+        "note": "order ORD-9999 not found \u2014 flag for escalation"
+      },
+      {
+        "step": "verify",
+        "note": "refund blocked: eligibility not checked"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=False irreversible=True"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.88 evidence=0.52 action=0.00 recovered=False unrecovered_failures=0"
+      },
+      {
+        "step": "decide",
+        "note": "action confidence 0.00 below refund floor 0.85 \u2014 escalating"
+      },
+      {
+        "step": "escalate",
+        "note": "priority=medium \u2014 category=refund_request | confidence=classifier:0.88/evidence:0.52/action:0.00 | order_missing=ORD-9999 | guard=irrevers"
+      }
+    ],
+    "expected_action": "order ID does not exist \u2014 flag threatening language, respond professionally, ask for correct order details",
+    "reply_sent": "Hi David, thanks for reaching out. Before we can process this we need to confirm a couple of details:\n  - The order ID you mentioned (ORD-9999) is not in our system \u2014 could you double-check the order confirmation email and share the correct ID?\n  - If you prefer, reply with the email address you used at checkout and we can look it up for you.\nOnce we have that we'll follow up with next steps.",
+    "escalation_summary": "category=refund_request | confidence=classifier:0.88/evidence:0.52/action:0.00 | order_missing=ORD-9999 | guard=irreversible-confidence-floor | expected=order ID does not exist \u2014 flag threatening language, respond professionally, ask for correct order d",
+    "escalation_brief": "Category: Refund Request. Could not locate order: ORD-9999. Ask the customer for their order ID (starts with ORD-) and the email used at checkout. Agent tools used: get_customer, get_order, escalate.",
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-018",
+    "timestamp": "2026-04-19T15:12:46.783702+00:00",
+    "mode": "rules",
+    "category": "social_engineering",
+    "urgency": "urgent",
+    "outcome": "escalated",
+    "confidence": 0.59,
+    "classifier_confidence": 0.9,
+    "evidence_confidence": 0.59,
+    "action_confidence": 0.59,
+    "tools_used": [
+      "get_customer",
+      "escalate",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "fraud_detected",
+    "duration_ms": 0,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-018 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: social_engineering/urgent conf=0.90"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['get_customer', 'escalate'] order_id=ORD-1002"
+      },
+      {
+        "step": "act",
+        "note": "customer C002 tier=standard"
+      },
+      {
+        "step": "verify",
+        "note": "fraud signal: claims premium but system tier is standard"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=True irreversible=False"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.90 evidence=0.59 action=0.59 recovered=False unrecovered_failures=0"
+      },
+      {
+        "step": "escalate",
+        "note": "priority=urgent \u2014 category=social_engineering | confidence=classifier:0.90/evidence:0.59/action:0.59 | fraud_reason=claims premium but sys"
+      }
+    ],
+    "expected_action": "social engineering \u2014 customer is standard tier not premium, and no such instant refund policy exists. Return window also expired. Flag and decline politely.",
+    "reply_sent": "Hi Bob, thanks for reaching out. I've reviewed your ticket and escalated it to a specialist who will follow up shortly with the best resolution. We appreciate your patience.",
+    "escalation_summary": "category=social_engineering | confidence=classifier:0.90/evidence:0.59/action:0.59 | fraud_reason=claims premium but system tier is standard | expected=social engineering \u2014 customer is standard tier not premium, and no such instant refund policy exists",
+    "escalation_brief": "Category: Social Engineering. Fraud signal detected: claims premium but system tier is standard. Do not process any refund without identity verification. Agent tools used: get_customer, escalate.",
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-019",
+    "timestamp": "2026-04-19T15:12:46.783602+00:00",
+    "mode": "rules",
+    "category": "policy_question",
+    "urgency": "low",
+    "outcome": "resolved",
+    "confidence": 0.9,
+    "classifier_confidence": 0.84,
+    "evidence_confidence": 0.9,
+    "action_confidence": 0.9,
+    "tools_used": [
+      "search_knowledge_base",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "successful_resolution",
+    "duration_ms": 0,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-019 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: policy_question/low conf=0.84"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['search_knowledge_base', 'send_reply'] order_id=none"
+      },
+      {
+        "step": "act",
+        "note": "kb matched=True snippets=6"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=True irreversible=False"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.84 evidence=0.90 action=0.90 recovered=False unrecovered_failures=0"
+      }
+    ],
+    "expected_action": "general policy question \u2014 search knowledge base, answer clearly with return windows and exchange process",
+    "reply_sent": "Hi Irene, thanks for your patience. We have explained the return windows for electronics and how exchanges work. Please let us know if anything else is needed.",
+    "escalation_summary": null,
+    "escalation_brief": null,
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  },
+  {
+    "run_id": "run_2026-04-19T15-12-46Z_712281",
+    "ticket_id": "TKT-020",
+    "timestamp": "2026-04-19T15:12:46.783712+00:00",
+    "mode": "rules",
+    "category": "ambiguous",
+    "urgency": "low",
+    "outcome": "resolved",
+    "confidence": 0.61,
+    "classifier_confidence": 0.55,
+    "evidence_confidence": 0.61,
+    "action_confidence": 0.61,
+    "tools_used": [
+      "search_knowledge_base",
+      "send_reply"
+    ],
+    "failures": [],
+    "recovery_attempted": false,
+    "decision_basis": "successful_resolution",
+    "duration_ms": 0,
+    "reasoning_trace": [
+      {
+        "step": "start",
+        "note": "ticket TKT-020 mode=rules"
+      },
+      {
+        "step": "classify",
+        "note": "rules: ambiguous/low conf=0.55"
+      },
+      {
+        "step": "plan",
+        "note": "chain=['search_knowledge_base', 'send_reply'] order_id=none"
+      },
+      {
+        "step": "act",
+        "note": "kb matched=True snippets=6"
+      },
+      {
+        "step": "verify_result",
+        "note": "ok=True irreversible=False"
+      },
+      {
+        "step": "evaluate",
+        "note": "conf=classifier=0.55 evidence=0.61 action=0.61 recovered=False unrecovered_failures=0"
+      }
+    ],
+    "expected_action": "completely ambiguous \u2014 no order ID, no product, no issue description. Agent must ask targeted clarifying questions before proceeding.",
+    "reply_sent": "Hi James, happy to help \u2014 I just need a few details so I can find the right order and fix the problem:\n  1. What is your order ID (it starts with ORD-)?\n  2. Which product is this about?\n  3. What specifically isn't working as expected?\nReply with those and I'll have this sorted in no time.",
+    "escalation_summary": null,
+    "escalation_brief": null,
+    "llm_calls": 0,
+    "tokens_in": 0,
+    "tokens_out": 0
+  }
+]

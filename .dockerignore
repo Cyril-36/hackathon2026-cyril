@@ -1,0 +1,17 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.git/
+.gitignore
+.env
+.env.example
+runs/
+dead_letter_queue.json
+.tmp_*.json
+.tmp_*/
+.DS_Store
+*.egg-info/
+architecture.png

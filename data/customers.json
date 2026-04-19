@@ -1,0 +1,172 @@
+[
+  {
+    "customer_id": "C001",
+    "name": "Alice Turner",
+    "email": "alice.turner@email.com",
+    "phone": "+1-415-555-0101",
+    "tier": "vip",
+    "member_since": "2019-03-12",
+    "total_orders": 47,
+    "total_spent": 6840.50,
+    "address": {
+      "street": "12 Maple Avenue",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94102"
+    },
+    "notes": "Long-standing VIP. Has had 2 refunds in the past year, both approved."
+  },
+  {
+    "customer_id": "C002",
+    "name": "Bob Mendes",
+    "email": "bob.mendes@email.com",
+    "phone": "+1-212-555-0198",
+    "tier": "standard",
+    "member_since": "2023-10-05",
+    "total_orders": 3,
+    "total_spent": 210.00,
+    "address": {
+      "street": "88 Birch Street",
+      "city": "New York",
+      "state": "NY",
+      "zip": "10001"
+    },
+    "notes": "New customer. No prior refund history."
+  },
+  {
+    "customer_id": "C003",
+    "name": "Carol Nguyen",
+    "email": "carol.nguyen@email.com",
+    "phone": "+1-312-555-0143",
+    "tier": "premium",
+    "member_since": "2021-06-18",
+    "total_orders": 22,
+    "total_spent": 3120.75,
+    "address": {
+      "street": "45 Oak Lane",
+      "city": "Chicago",
+      "state": "IL",
+      "zip": "60601"
+    },
+    "notes": "Premium member. Prefers email communication."
+  },
+  {
+    "customer_id": "C004",
+    "name": "David Park",
+    "email": "david.park@email.com",
+    "phone": "+1-206-555-0177",
+    "tier": "standard",
+    "member_since": "2022-01-30",
+    "total_orders": 9,
+    "total_spent": 780.20,
+    "address": {
+      "street": "300 Pine Road",
+      "city": "Seattle",
+      "state": "WA",
+      "zip": "98101"
+    },
+    "notes": "Has raised 1 chargeback dispute in the past — resolved in ShopWave's favour."
+  },
+  {
+    "customer_id": "C005",
+    "name": "Emma Collins",
+    "email": "emma.collins@email.com",
+    "phone": "+1-512-555-0165",
+    "tier": "vip",
+    "member_since": "2018-11-02",
+    "total_orders": 91,
+    "total_spent": 14220.00,
+    "address": {
+      "street": "7 Sunset Blvd",
+      "city": "Austin",
+      "state": "TX",
+      "zip": "73301"
+    },
+    "notes": "Highest lifetime value customer. Has a standing exception for extended return windows pre-approved by management."
+  },
+  {
+    "customer_id": "C006",
+    "name": "Frank Osei",
+    "email": "frank.osei@email.com",
+    "phone": "+1-404-555-0112",
+    "tier": "standard",
+    "member_since": "2024-01-14",
+    "total_orders": 1,
+    "total_spent": 49.99,
+    "address": {
+      "street": "19 Elm Street",
+      "city": "Atlanta",
+      "state": "GA",
+      "zip": "30301"
+    },
+    "notes": "Brand new customer. First and only order."
+  },
+  {
+    "customer_id": "C007",
+    "name": "Grace Patel",
+    "email": "grace.patel@email.com",
+    "phone": "+1-617-555-0134",
+    "tier": "premium",
+    "member_since": "2020-08-22",
+    "total_orders": 35,
+    "total_spent": 4890.00,
+    "address": {
+      "street": "56 Willow Way",
+      "city": "Boston",
+      "state": "MA",
+      "zip": "02101"
+    },
+    "notes": "Premium member. Has submitted 4 refund requests — all legitimate, all approved."
+  },
+  {
+    "customer_id": "C008",
+    "name": "Henry Marsh",
+    "email": "henry.marsh@email.com",
+    "phone": "+1-303-555-0188",
+    "tier": "standard",
+    "member_since": "2022-05-19",
+    "total_orders": 14,
+    "total_spent": 1120.60,
+    "address": {
+      "street": "210 Cedar Drive",
+      "city": "Denver",
+      "state": "CO",
+      "zip": "80201"
+    },
+    "notes": "Regular customer. No flags."
+  },
+  {
+    "customer_id": "C009",
+    "name": "Irene Castillo",
+    "email": "irene.castillo@email.com",
+    "phone": "+1-713-555-0156",
+    "tier": "premium",
+    "member_since": "2021-02-10",
+    "total_orders": 28,
+    "total_spent": 3670.90,
+    "address": {
+      "street": "88 Rosewood Court",
+      "city": "Houston",
+      "state": "TX",
+      "zip": "77001"
+    },
+    "notes": "Premium member. Has reported 2 damaged item incidents — both verified."
+  },
+  {
+    "customer_id": "C010",
+    "name": "James Wu",
+    "email": "james.wu@email.com",
+    "phone": "+1-858-555-0199",
+    "tier": "standard",
+    "member_since": "2023-03-28",
+    "total_orders": 6,
+    "total_spent": 430.15,
+    "address": {
+      "street": "40 Harbor View",
+      "city": "San Diego",
+      "state": "CA",
+      "zip": "92101"
+    },
+    "notes": "No issues on record."
+  }
+]

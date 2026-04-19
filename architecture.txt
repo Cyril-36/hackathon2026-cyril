@@ -1,0 +1,66 @@
+ShopWave Autonomous Support Resolution Agent — architecture
+============================================================
+
+                                  run.py
+                                    │
+                                    ▼
+              ┌─────────────────────────────────────────┐
+              │  asyncio.gather + Semaphore(5)          │
+              │  20 tickets in parallel, bounded        │
+              └─────────────────────────────────────────┘
+                                    │
+              ┌─────────────────────┴─────────────────────┐
+              ▼                                           ▼
+       process_ticket(T-001)   ...   process_ticket(T-020)
+
+                        ┌────────────────────────────┐
+                        │   agent.process_ticket     │
+                        │                            │
+   ┌────────────────────┤ 1. CLASSIFY  (llm.py)      │
+   │                    │    ↓                       │
+   │                    │ 2. PLAN      (policies.py) │
+   │                    │    ↓                       │
+   │                    │ 3. ACT       (tools.py via │
+   │                    │              registry.py)  │
+   │                    │    ↓                       │
+   │                    │ 4. VERIFY    (policies.py) │
+   │                    │    ↓                       │
+   │                    │ 5. EVALUATE  (policies.py) │
+   │                    │    ↓                       │
+   │                    │ 6. RESOLVE or ESCALATE     │
+   │                    │    ↓                       │
+   │                    │ 7. LOG → audit_log.json    │
+   │                    └────────────────────────────┘
+   │
+   ▼
+ registry.py     ← unified plumbing wraps BOTH tool calls AND LLM calls
+   • exponential backoff + jitter
+   • Pydantic schema validation at every I/O boundary
+   • classify error: timeout | malformed_json | partial_fields | stale_data
+   • retry if transient, fail fast if logic error
+   • dead_letter_queue.json on retry exhaustion
+   • LLM path: 429 retry-with-jitter + one schema-repair attempt
+
+ policies.py    ← pure decision functions (no I/O, unit-testable)
+   • chain_template(category)           → tool chain per category
+   • refund_guard(state)                → block irreversible writes
+   • detect_social_engineering(...)     → fraud pattern check
+   • within_return_window / warranty_active
+   • compute_decision_basis(state)      → 7-value enum
+   • compute_escalation_reason(state)   → structured handoff summary
+
+ eleven async tools via registry:
+   get_order · get_customer · get_customer_orders · get_product
+   search_knowledge_base · check_refund_eligibility
+   issue_refund (irreversible, idempotent) · cancel_order
+   initiate_exchange · send_reply · escalate
+
+ dual confidence thresholds:
+   reversible   (send_reply)  : conf >= 0.70
+   irreversible (issue_refund): conf >= 0.85
+
+ audit entry (per ticket):
+   run_id · ticket_id · timestamp · mode · category · urgency
+   outcome · confidence · tools_used · failures[] · recovery_attempted
+   decision_basis · duration_ms · reasoning_trace[]
+   reply_sent · escalation_summary · expected_action
