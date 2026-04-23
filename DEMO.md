@@ -168,18 +168,17 @@ with an event emitter so the browser can render the trace live.
 
 ## If asked "does the agent ever bypass the refund guard?"
 
-No. Damaged-on-arrival (KB §1.5) still runs through
-`check_refund_eligibility` before `issue_refund`; the policy changes the
-eligibility result, not the irreversible-action order. Point to
-`app/agent.py:_act`, `app/tools.py:check_refund_eligibility`, and `TKT-008`
-in the clean audit log:
+No. Even damaged-on-arrival cases still check refund eligibility before a
+refund is issued. The policy affects the eligibility decision, not the order
+of operations. If you need to show it, point to `app/agent.py` (`_act`),
+`app/tools.py` (`check_refund_eligibility`), and `TKT-008` in the clean log.
 
 ```bash
 python scripts/show_ticket.py TKT-008 --no-trace
 ```
 
-Expect `successful_resolution` with both `check_refund_eligibility` and
-`issue_refund` in the chain, in that order.
+You should see a `successful_resolution` where
+`check_refund_eligibility` appears before `issue_refund`.
 
 ---
 
@@ -190,14 +189,14 @@ python run.py --mode rules --ticket TKT-013 --today 2024-04-01
 python scripts/show_ticket.py TKT-013 --no-trace
 ```
 
-Expect `declined` with both reasons (registered online + expired window)
-verbatim in the reply.
+This should return `declined` with both reasons in the reply: the order was
+registered online, and the return window had expired.
 
 ---
 
-## What NOT to show
+## What not to show
 
-- A chaos rerun with a different seed on every try — the stable hash makes
-  runs reproducible, so use the same `--seed 42` each time for the demo.
-- The `hybrid` or `llm` modes without an API key in `.env` — they fall
-  back silently, which isn't what you want to explain in three minutes.
+- A chaos rerun with a different seed each time. The run should stay
+  reproducible, so use `--seed 42`.
+- The `hybrid` or `llm` modes without an API key in `.env`, because that
+  fallback path is not useful to explain in a short demo.

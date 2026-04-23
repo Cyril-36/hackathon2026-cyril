@@ -6,6 +6,8 @@
 
 Built for the Agentic AI Hackathon 2026.
 
+Hosted dashboard: [Cyril-36/shopwave-dashboard](https://huggingface.co/spaces/Cyril-36/shopwave-dashboard)
+
 ---
 
 ## One-command run

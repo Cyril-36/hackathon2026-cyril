@@ -12,7 +12,7 @@ runs/
 .tmp_*.json
 .tmp_*/
 node_modules/
-package-lock.json
 output/
 .appdeploy
 .vercel
+.dist/
